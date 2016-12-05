@@ -14,9 +14,8 @@ namespace FoodService.Model
         public double lat { get; set; }
         public double lng { get; set; }
         public int distance { get; set; }
-        public List<string> formattedAddress { get; set; }
         public string categoryId { get; set; }
-        public string catagoryName { get; set; }
+        public string categoryName { get; set; }
         public string url { get; set; }
     }
 }
