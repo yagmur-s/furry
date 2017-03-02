@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinderApp", "FinderApp\FinderApp.csproj", "{F2B94739-FD85-4E65-9D62-B50A91C3846B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F2B94739-FD85-4E65-9D62-B50A91C3846B}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{F2B94739-FD85-4E65-9D62-B50A91C3846B}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{F2B94739-FD85-4E65-9D62-B50A91C3846B}.Release|iPhone.ActiveCfg = Release|iPhone
+		{F2B94739-FD85-4E65-9D62-B50A91C3846B}.Release|iPhone.Build.0 = Release|iPhone
+		{F2B94739-FD85-4E65-9D62-B50A91C3846B}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{F2B94739-FD85-4E65-9D62-B50A91C3846B}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{F2B94739-FD85-4E65-9D62-B50A91C3846B}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{F2B94739-FD85-4E65-9D62-B50A91C3846B}.Debug|iPhone.Build.0 = Debug|iPhone
+	EndGlobalSection
+EndGlobal

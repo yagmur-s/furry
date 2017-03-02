@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="Finder.MainPage"
+		Title="Main">
+	<StackLayout>
+		<Label
+			Text = "Lat"
+			Font = "Large"
+			x:Name = "latLabel"
+			HorizontalOptions = "Center"
+			VerticalOptions = "CenterAndExpand"/>
+		<Label
+			Text = "Lon"
+			Font = "Large"
+			x:Name = "lonLabel"
+			HorizontalOptions = "Center"
+			VerticalOptions = "CenterAndExpand"/>
+		<Button 
+			Text="Find me!"
+			x:Name = "findBtn"
+			HorizontalOptions = "Center"
+			VerticalOptions = "CenterAndExpand"/>
+		<Button 
+			Text="Next"
+			x:Name = "nextBtn"
+			HorizontalOptions = "Center"
+			VerticalOptions = "CenterAndExpand"/>
+	</StackLayout>
+</ContentPage>
