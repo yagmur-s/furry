@@ -1,1 +1,1 @@
-# furry
+# Food Finder App
