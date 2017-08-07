@@ -22,8 +22,8 @@ namespace FoodService
     // [System.Web.Script.Services.ScriptService]
     public class WebService : System.Web.Services.WebService
     {
-         
-        
+
+
         public List<VenueModel> GetVenue(string latitude, string longitude)
         {
             String jsonData;
@@ -36,9 +36,9 @@ namespace FoodService
 
             using (var client = new WebClient())
             {
-                //jsonData = client.DownloadString("https://api.foursquare.com/v2/venues/search?v=&ll=38.42%2C27.13&intent=browse&radius=800&categoryId=4d4b7105d754a06374d81259&client_id=TOMWFBM0IH5Y3XQLE1L41JY22H5OIQO0DKUURDQ5JOKKK4Q3&client_secret=HCGTEWHVFD35NS5ABIKGI3FAXOUCGPUMC5Z0MSVCOYBBBKNX");
+                //jsonData = client.DownloadString("https://api.foursquare.com/v2/venues/search?v=20170807&ll=38.42,27.13&intent=browse&radius=800&categoryId=4d4b7105d754a06374d81259&client_id=TOMWFBM0IH5Y3XQLE1L41JY22H5OIQO0DKUURDQ5JOKKK4Q3&client_secret=HCGTEWHVFD35NS5ABIKGI3FAXOUCGPUMC5Z0MSVCOYBBBKNX");
                 client.Encoding = System.Text.Encoding.UTF8;
-                jsonData = client.DownloadString("https://api.foursquare.com/v2/venues/search?v="+ currentDate + "&ll="+ latitude + ","+ longitude + "&intent=browse&radius=800&categoryId=4d4b7105d754a06374d81259&client_id="+ clientID + "&client_secret="+ clientSecret);
+                jsonData = client.DownloadString("https://api.foursquare.com/v2/venues/search?v=" + currentDate + "&ll=" + latitude + "," + longitude + "&intent=browse&radius=800&categoryId=4d4b7105d754a06374d81259&client_id=" + clientID + "&client_secret=" + clientSecret);
             }
 
             JObject responseData = JObject.Parse(jsonData);
@@ -51,23 +51,24 @@ namespace FoodService
             {
                 VenueModel vm = new VenueModel();
                 var element = venuesElement[i];
-                vm.venueId =  element["id"].ToString();
+                vm.venueId = element["id"].ToString();
                 vm.venueName = element["name"].ToString();
                 var locationElement = element["location"];
-                vm.address = locationElement["address"].ToString();
+                vm.address = (locationElement["address"] != null) ? locationElement["address"].ToString() : String.Empty;
                 vm.lat = double.Parse(locationElement["lat"].ToString());
                 vm.lng = double.Parse(locationElement["lng"].ToString());
-                vm.distance = int.Parse(locationElement["distance"].ToString());
-                var categories = element["categories"];
-                var categoryElement = categories[0];
-                vm.categoryId = categoryElement["id"].ToString();
-                vm.categoryName = categoryElement["name"].ToString();
+                vm.distance = (locationElement["distance"] != null) ? int.Parse(locationElement["distance"].ToString()) : -1;
+                var categories = (element["categories"] != null) ? element["categories"] : String.Empty;
+                var categoryElement = (categories[0] != null) ? categories[0] : String.Empty;
+                vm.categoryId = (categoryElement != null) ? categoryElement["id"].ToString() : String.Empty;
+                vm.categoryName = (categoryElement != null) ? categoryElement["name"].ToString() : String.Empty;
                 //vm.url = element["url"].ToString() == null ? "No Website" : element["url"].ToString();
                 if (element["url"] != null)
                 {
                     vm.url = element["url"].ToString();
                 }
-                else {
+                else
+                {
                     vm.url = "No Website";
                 }
 
@@ -121,5 +122,9 @@ namespace FoodService
         }
 
 
-        }
+    }
 }
+
+
+
+
