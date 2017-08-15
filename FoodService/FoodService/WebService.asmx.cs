@@ -24,7 +24,7 @@ namespace FoodService
     {
 
 
-        public List<VenueModel> GetVenue(string latitude, string longitude)
+        public List<VenueModel> GetVenue(string latitude, string longitude, double dist = 800)
         {
             String jsonData;
             List<VenueModel> venueList = new List<VenueModel>();
@@ -33,12 +33,12 @@ namespace FoodService
             string clientID = ConfigurationSettings.AppSettings["client_id"];
             string clientSecret = ConfigurationSettings.AppSettings["client_secret"];
             string currentDate = DateTime.Now.ToString("yyyyMMdd").ToString();
-
+            double distance = dist;
             using (var client = new WebClient())
             {
                 //jsonData = client.DownloadString("https://api.foursquare.com/v2/venues/search?v=20170807&ll=38.42,27.13&intent=browse&radius=800&categoryId=4d4b7105d754a06374d81259&client_id=TOMWFBM0IH5Y3XQLE1L41JY22H5OIQO0DKUURDQ5JOKKK4Q3&client_secret=HCGTEWHVFD35NS5ABIKGI3FAXOUCGPUMC5Z0MSVCOYBBBKNX");
                 client.Encoding = System.Text.Encoding.UTF8;
-                jsonData = client.DownloadString("https://api.foursquare.com/v2/venues/search?v=" + currentDate + "&ll=" + latitude + "," + longitude + "&intent=browse&radius=800&categoryId=4d4b7105d754a06374d81259&client_id=" + clientID + "&client_secret=" + clientSecret);
+                jsonData = client.DownloadString("https://api.foursquare.com/v2/venues/search?v=" + currentDate + "&ll=" + latitude + "," + longitude + "&intent=browse&radius=" + distance + "&categoryId=4d4b7105d754a06374d81259&client_id=" + clientID + "&client_secret=" + clientSecret);
             }
 
             JObject responseData = JObject.Parse(jsonData);
@@ -80,11 +80,11 @@ namespace FoodService
         }
 
         [WebMethod]
-        public string GetVenueJson(string latitude, string longitude)
+        public string GetVenueJson(string latitude, string longitude, double dist)
         {
             List<VenueModel> venueList = new List<VenueModel>();
 
-            venueList = GetVenue(latitude, longitude);
+            venueList = GetVenue(latitude, longitude, dist);
             string jsonVenueList = JsonConvert.SerializeObject(venueList);
 
             return jsonVenueList;
@@ -97,18 +97,22 @@ namespace FoodService
             Random rand = new Random(DateTime.Now.Millisecond);
 
             int number = rand.Next();
+            if (listCount == 0)
+                return 0;
 
             int randomNumber = number % listCount;
-
             return randomNumber;
         }
 
         [WebMethod]
-        public string RandomVenueChooser(string latitude, string longitude)
+        public string RandomVenueChooser(string latitude, string longitude, double dist)
         {
 
             List<VenueModel> venueList = new List<VenueModel>();
-            venueList = GetVenue(latitude, longitude);
+            venueList = GetVenue(latitude, longitude, dist);
+
+            if (venueList.Count == 0)
+                return "There is no place matching with these coordinations";
 
             int selectedVenueNumber = RandomVenueNumberChooser(venueList);
 
